@@ -1,0 +1,1 @@
+Raw data files are not bundled. The notebook downloads the UCI household power dataset and retrieves historical weather from Open-Meteo. See README.md for sources and execution notes.\n
