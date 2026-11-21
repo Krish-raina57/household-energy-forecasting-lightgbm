@@ -7,3 +7,6 @@ scikit-learn
 lightgbm
 statsmodels
 jupyter
+
+streamlit
+plotly
