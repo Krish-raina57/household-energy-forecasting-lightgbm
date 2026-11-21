@@ -100,7 +100,8 @@ def load_and_prepare_data():
     consumption = (
         hourly_pattern[hour_of_day] * seasonal * weekend_factor
         + np.random.normal(0, 0.15, n)  # noise
-    ).clip(0.1)
+    )
+    consumption = np.clip(consumption, 0.1, None)
     
     # Simulated temperature (°C)
     temperature = (
@@ -110,7 +111,7 @@ def load_and_prepare_data():
     
     # Simulated LightGBM predictions (close to actual with some error)
     predictions = consumption + np.random.normal(0, 0.08, n)
-    predictions = predictions.clip(0.1)
+    predictions = np.clip(predictions, 0.1, None)
     
     df = pd.DataFrame({
         'datetime': dates,
@@ -143,7 +144,7 @@ date_range = st.sidebar.date_input(
     max_value=max_date
 )
 
-if len(date_range) == 2:
+if isinstance(date_range, (tuple, list)) and len(date_range) == 2:
     mask = (df['datetime'].dt.date >= date_range[0]) & (df['datetime'].dt.date <= date_range[1])
     filtered_df = df[mask]
 else:
